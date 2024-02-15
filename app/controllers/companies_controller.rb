@@ -2,24 +2,34 @@ class CompaniesController < ApplicationController
 
   def index
     # find all Company rows
+    @companies = Company.all
     # render companies/index view
   end
 
-  # def show
-  #   # find a Company
-  #   # render companies/show view with details about Company
-  # end
+  def show
+    # find a Company
+    @company = Company.find_by({"id" => params["id"]})
+    # render companies/show view with details about Company
+  end
 
-  # def new
-  #   # render view with new Company form
-  # end
+  def new
 
-  # def create
+    # render view with new Company form
+  end
+
+   def create
   #   # start with a new Company
+  @comapny = Company.new
   #   # assign user-entered form data to Company's columns
+  @comapny["name"] = params["name"]
+  @comapny["city"] = params["city"]
+  @comapny["state"] = params["state"]
   #   # save Company row
+  @company.save
   #   # redirect user
-  # end
+  redirect_to "/companies"
+  
+   end
 
   # def edit
   #   # find a Company
@@ -39,4 +49,4 @@ class CompaniesController < ApplicationController
   #   # redirect user
   # end
 
-end
+
